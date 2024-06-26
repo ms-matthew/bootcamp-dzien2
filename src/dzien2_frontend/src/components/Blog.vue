@@ -9,6 +9,8 @@
                 <p>id: {{ index }}</p>
                 <p>{{ wpis }}</p>
                 <button  class="bg-blue-600 rounded text-white p-4" @click="deleteWpis(index)">usun</button>
+                <input v-model="editedText" class="border-2 border-blue-600 p-4" type="text">
+                <button  class="bg-blue-600 rounded text-white p-4" @click="edytujWpisy(index, editedText)">edytuj</button>
             </div>
         </div>
         <div class="flex justify-center flex-col">
@@ -39,6 +41,9 @@ export default {
         },
         async pobierzWpisy() {
             this.wpisy = await dzien2_backend.odczytaj_wpisy();
+        },
+        async edytujWpisy(){
+            await dzien2_backend.edytuj_wpis(index, this.editedText);
         }
     },
     async mounted(){
